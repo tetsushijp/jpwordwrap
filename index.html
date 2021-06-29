@@ -7,7 +7,7 @@
 ここに文章をペーストしてください
 </textarea>
 <p>
-<button onclick="javascript:conv();"> 変換 </button>
+<button onclick="javascript:conv();">　　 変換　　 </button>
 
 <script>
 
@@ -31,5 +31,11 @@ function conv() {
   script.id="kuromoji"; 
   document.body.appendChild(script); 
 };
+
+$(document).ready(function(){
+  $('#target-text').focus(function(){
+    $(this).select();
+  });
+});
 
 </script>
