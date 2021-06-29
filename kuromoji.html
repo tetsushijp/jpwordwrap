@@ -1,0 +1,35 @@
+<body>
+hello
+<div id="target-text">
+</div>
+
+</body>
+<script src="kuromoji.jsxxx"></script>
+<script>
+console.log("hello");
+var script = document.createElement('script');
+script.src = 'https://takuyaa.github.io/kuromoji.js/demo/kuromoji/build/kuromoji.js'; //'kuromoji.js';
+script.onload = function() {start_tokenize();}
+document.body.appendChild(script);
+    
+//https://takuyaa.github.io/kuromoji.js/demo/kuromoji/dict/unk_char.dat.gz
+function start_tokenize() {
+    kuromoji.builder({ dicPath: "https://takuyaa.github.io/kuromoji.js/demo/kuromoji/dict/" }).build(function (err, tokenizer) {
+        // tokenizer is ready
+        var str = "すもももももももものうち";
+        var rstr="";
+        var path = tokenizer.tokenize(str );
+//        for(var i=0; i<path.length;i++) {            
+//        }
+        path.forEach(function(v, i, a){
+            rstr+=v.surface_form+"#";
+          console.log(v.surface_form);
+        });
+        console.log(path);
+        console.log(rstr);
+    });    
+}
+
+</script>
+
+

@@ -1,0 +1,35 @@
+<head>
+<meta charset="utf-8"/>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+
+<textarea id="target-text" rows="8" cols="160">
+ここに文章をペーストしてください
+</textarea>
+<p>
+<button onclick="javascript:conv();"> 変換 </button>
+
+<script>
+
+function conv() { 
+  function start_tokenize(){
+    console.log("tokenize");
+    kuromoji.builder({ dicPath: "./dict/" }).build(function (err, tokenizer) { 
+      var str = document.getElementById("target-text").value;
+      console.log("text:"+str);
+      var rstr=""; var path = tokenizer.tokenize(str );
+      path.forEach(function(v, i, a){ rstr+=v.surface_form+"#"; console.log(v.surface_form); }); 
+      console.log(path); 
+      console.log(rstr); 
+      document.body.removeChild(document.getElementById('kuromoji')); 
+      document.getElementById("target-text").value = rstr;
+    }); 
+  } 
+  var script = document.createElement('script'); 
+  script.src = './kuromoji.js'; 
+  script.onload = start_tokenize; 
+  script.id="kuromoji"; 
+  document.body.appendChild(script); 
+};
+
+</script>
